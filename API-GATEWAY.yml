@@ -30,6 +30,7 @@ spring:
   security:
     filter:
       order: 1
+  
 eureka:
   client:
     serviceUrl:
