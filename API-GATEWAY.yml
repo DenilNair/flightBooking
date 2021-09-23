@@ -1,0 +1,41 @@
+
+server:
+  port: 9097
+  
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: FLIGHTDETAILS-SERVICE
+        uri: lb://FLIGHTDETAILS-SERVICE
+        predicates:
+        - Path=/flightservice/**
+        ##filters:
+          ##  - RewritePath=/cc-converter/from/(?<from>.*)/to/(?<to>.*)/quantity/(?<quantity>.*), /currency-converter/from/$\{from}/to/$\{to}/quantity/$\{quantity}
+            ##- name: Hystrix
+              ##args:
+                ##    name: hystrixFx
+                  ##  fallbackUri: forward:/cc-converter/fallback
+      
+      ##- id: CUSTOMER-SERVICE
+        ##uri: lb://CUSTOMER-SERVICE
+        ##predicates:
+        ##- Path=/customer/**
+      
+      
+  application:
+    name: API-GATEWAY
+
+  
+  security:
+    filter:
+      order: 1
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+logging:
+  file:
+    name: gatewayLog
+    
+
